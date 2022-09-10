@@ -11,7 +11,7 @@ contract PiggyBank {
   address public owner;
   address[] public userIndex;
   uint count = userIndex.length;
-  
+
   event Deposit(address sender, uint256 amount);
 
 
@@ -21,7 +21,13 @@ contract PiggyBank {
     uint256 balance;
   }
 
+  struct UserDetails {
+    string calldata name;
+    uint256 age;
+  }
+
   mapping (address => Balance) public balances;
+  mapping (address => UserDetails) public userDetails;
 
   constructor() payable {
     owner = msg.sender;
@@ -38,11 +44,11 @@ contract PiggyBank {
   function deposit(uint256 amount) 
     public payable returns(bool success) {
       // Need to convert to gwei?
-        if(balances[owner] == 0 && amount > 0) studentIndex.push(owner);
-        balances[owner].balance = balances[owner] + amount;
+      if(balances[owner] == 0 && amount > 0) studentIndex.push(owner);
+      balances[owner].balance = balances[owner] + amount;
 
 
-        return true;
+      return true;
   }
 
   function checkBalance(address user)
@@ -50,12 +56,27 @@ contract PiggyBank {
       return( students[user].balance; )
     }
 
+  function setUserDetails(string calldata name, uint256 age)
+    public returns(bool success) {
+      userDetails[owner].name = name;
+      userDetails[owner].age = age;
 
-    function setPurpose(string memory newPurpose) public {
-        purpose = newPurpose;
-        console.log(msg.sender,"set purpose to",purpose);
-        emit SetPurpose(msg.sender, purpose);
-    }
+      return true;
+  }
+
+  function getUserDetail(address user)
+    public view returns(uint256 balance) {
+    return( 
+      userDetails[user].name; 
+      userDetails[user].age;
+    )
+  }
+
+    // function setPurpose(string memory newPurpose) public {
+    //     purpose = newPurpose;
+    //     console.log(msg.sender,"set purpose to",purpose);
+    //     emit SetPurpose(msg.sender, purpose);
+    // }
 
     // to support receiving ETH by default
     receive() external payable {}
