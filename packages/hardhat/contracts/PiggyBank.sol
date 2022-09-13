@@ -8,13 +8,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract PiggyBank {
 
-  address public owner;
-  address[] public userIndex;
-  uint count = userIndex.length;
+  address payable public owner;
 
-  event Deposit(address sender, uint256 amount);
-
-
+  uint public transactions;
 
   // number = uint, string = bytes32
   struct Balance {
@@ -44,16 +40,15 @@ contract PiggyBank {
   function deposit(uint256 amount) 
     public payable returns(bool success) {
       // Need to convert to gwei?
-      if(balances[owner] == 0 && amount > 0) studentIndex.push(owner);
-      balances[owner].balance = balances[owner] + amount;
-
+      balances[owner] += amount;
+      transactions++;
 
       return true;
   }
 
   function checkBalance(address user)
     public view returns(uint256 balance) {
-      return( students[user].balance; )
+      return balances[owner];
     }
 
   function setUserDetails(string calldata name, uint256 age)
