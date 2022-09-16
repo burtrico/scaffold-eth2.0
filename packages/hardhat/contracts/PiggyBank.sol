@@ -12,7 +12,6 @@ contract PiggyBank {
 
   uint public transactions;
 
-  // number = uint, string = bytes32
   struct Balance {
     uint256 balance;
   }
@@ -39,7 +38,6 @@ contract PiggyBank {
 
   function deposit(uint256 amount) 
     public payable returns(bool success) {
-      // Need to convert to gwei?
       balances[owner] += amount;
       transactions++;
 
@@ -66,14 +64,7 @@ contract PiggyBank {
       userDetails[user].age;
     )
   }
-
-    // function setPurpose(string memory newPurpose) public {
-    //     purpose = newPurpose;
-    //     console.log(msg.sender,"set purpose to",purpose);
-    //     emit SetPurpose(msg.sender, purpose);
-    // }
-
-    // to support receiving ETH by default
+  
     receive() external payable {}
     fallback() external payable {}
   }
