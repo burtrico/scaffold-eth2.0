@@ -22,7 +22,7 @@ contract PiggyBank {
   }
 
   mapping (address => Balance) public balances;
-  mapping (address => UserDetails) public userDetails;
+  mapping (address => UserDetails) public usersDetails;
 
   constructor() payable {
     owner = msg.sender;
@@ -51,8 +51,8 @@ contract PiggyBank {
 
   function setUserDetails(string calldata name, uint256 age)
     public returns(bool success) {
-      userDetails[owner].name = name;
-      userDetails[owner].age = age;
+      usersDetails[owner].name = name;
+      usersDetails[owner].age = age;
 
       return true;
   }
@@ -64,7 +64,7 @@ contract PiggyBank {
       userDetails[user].age;
     )
   }
-  
+
     receive() external payable {}
     fallback() external payable {}
   }
