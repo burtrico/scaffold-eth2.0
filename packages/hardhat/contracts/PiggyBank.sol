@@ -12,18 +12,17 @@ contract PiggyBank {
 
   uint public transactions;
 
-  // number = uint, string = bytes32
   struct Balance {
     uint256 balance;
   }
 
   struct UserDetails {
-    string calldata name;
+    string name;
     uint256 age;
   }
 
   mapping (address => Balance) public balances;
-  mapping (address => UserDetails) public userDetails;
+  mapping (address => UserDetails) public usersDetails;
 
   constructor() payable {
     owner = msg.sender;
@@ -39,7 +38,6 @@ contract PiggyBank {
 
   function deposit(uint256 amount) 
     public payable returns(bool success) {
-      // Need to convert to gwei?
       balances[owner] += amount;
       transactions++;
 
@@ -53,8 +51,8 @@ contract PiggyBank {
 
   function setUserDetails(string calldata name, uint256 age)
     public returns(bool success) {
-      userDetails[owner].name = name;
-      userDetails[owner].age = age;
+      usersDetails[owner].name = name;
+      usersDetails[owner].age = age;
 
       return true;
   }
@@ -67,13 +65,6 @@ contract PiggyBank {
     )
   }
 
-    // function setPurpose(string memory newPurpose) public {
-    //     purpose = newPurpose;
-    //     console.log(msg.sender,"set purpose to",purpose);
-    //     emit SetPurpose(msg.sender, purpose);
-    // }
-
-    // to support receiving ETH by default
     receive() external payable {}
     fallback() external payable {}
   }
