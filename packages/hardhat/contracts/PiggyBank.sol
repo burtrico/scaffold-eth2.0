@@ -17,7 +17,7 @@ contract PiggyBank {
   }
 
   struct UserDetails {
-    string calldata name;
+    string name;
     uint256 age;
   }
 
