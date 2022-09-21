@@ -38,5 +38,27 @@ describe("My Dapp", function () {
           .withArgs(owner.address, newDeposit);
       });
     });
+
+    describe("setUserDetails()", function () {
+      it("Should be able to deposit ETH", async function () {
+        const newUserName = "Sarah";
+        const newUserAge = 24;
+        const [owner] = await ethers.getSigners();
+
+        await myContract.setUserDetails(newUserName, newUserAge);
+        // expect(await myContract.checkBalance(owner.address)).to.equal(newDeposit);
+      });
+
+      it("Should emit a Deposit event ", async function () {
+        const [owner] = await ethers.getSigners();
+
+        const newDeposit = 0.7;
+
+        expect(await myContract.deposit(newDeposit))
+          .to.emit(myContract, "Deposit")
+          .withArgs(owner.address, newDeposit);
+      });
+    });
+
   });
 });
