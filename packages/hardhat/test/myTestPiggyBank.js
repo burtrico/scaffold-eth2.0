@@ -46,18 +46,18 @@ describe("My Dapp", function () {
         const [owner] = await ethers.getSigners();
 
         await myContract.setUserDetails(newUserName, newUserAge);
-        // expect(await myContract.checkBalance(owner.address)).to.equal(newDeposit);
+        expect(await myContract.getUserDetails(owner.address)).to.equal(newUserName, newUserAge);
       });
 
-      it("Should emit a Deposit event ", async function () {
-        const [owner] = await ethers.getSigners();
+      // it("Should emit a Deposit event ", async function () {
+      //   const [owner] = await ethers.getSigners();
 
-        const newDeposit = 0.7;
+      //   const newDeposit = 0.7;
 
-        expect(await myContract.deposit(newDeposit))
-          .to.emit(myContract, "Deposit")
-          .withArgs(owner.address, newDeposit);
-      });
+      //   expect(await myContract.deposit(newDeposit))
+      //     .to.emit(myContract, "Deposit")
+      //     .withArgs(owner.address, newDeposit);
+      // });
     });
 
   });
