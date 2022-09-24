@@ -57,12 +57,11 @@ contract PiggyBank {
       return true;
   }
 
-  function getUserDetail(address user)
-    public view returns(uint256 balance) {
+  function getUserDetails(address user)
+    public view returns(string calldata name, uint256 age) {
     return( 
-      userDetails[user].name; 
-      userDetails[user].age;
-    )
+      usersDetails[user].name,
+      usersDetails[user].age );
   }
 
     receive() external payable {}
